@@ -43,7 +43,7 @@ tiles2 = get_tile_list(set2).map{|t| [t[:id], t]}.to_h
 puts 'Number of tiles in set 1: ' + tiles1.length.to_s
 puts 'Number of tiles in set 2: ' + tiles2.keys.length.to_s
 puts 'Different tiles:'
-replace_model_name = ['ttf02', 'ttf01']
+replace_model_name = [] # ['ttf02', 'ttf01']
 for tile1 in tiles1 do
   tile2 = tiles2[tile1[:id]]
   if !tile2
@@ -54,10 +54,10 @@ for tile1 in tiles1 do
       tile2_model = tile2_model.sub(replace_model_name[0], replace_model_name[1])
     end
     if tile1[:model] != tile2_model
-      puts "Tile #{tile1[:id]} models don't match: #{tile1[:model]} <-> #{tile2_model}"
+      puts "Tile #{tile1[:id]} models don't match: \"#{tile1[:model]}\" <-> \"#{tile2_model}\""
     end
     if tile1[:wm] != tile2[:wm]
-      puts "Tile #{tile1[:id]} walk meshes don't match: #{tile1[:wm]} <-> #{tile2[:wm]}"
+      puts "Tile #{tile1[:id]} walk meshes don't match: \"#{tile1[:wm]}\" <-> \"#{tile2[:wm]}\""
     end
   end
 end
@@ -65,6 +65,7 @@ if tiles2.keys.length > tiles1.length
   puts 'Only in set 2:'
   only2 = tiles2.keys - tiles1.map{|t| t[:id]}
   for id in only2
-    puts tiles2[id]
+    t = tiles2[id]
+    puts "Tile #{id}: Model \"#{t[:model]}\", WalkMesh \"#{t[:wm]}\""
   end
 end
