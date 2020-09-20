@@ -11,7 +11,7 @@ def get_tile_list(set)
   id = -1
   model = ''
   wm = ''
-  for line in set.split do
+  for line in set.lines do
     m = line.match(/\[TILE(\d+)\]/)
     if m
       if id != -1
@@ -21,12 +21,12 @@ def get_tile_list(set)
       id = m[1]
       next
     end
-    m = line.match(/Model=(.*)/)
+    m = line.match(/Model=(\w*)/)
     if m
       model = m[1]
       next
     end
-    m = line.match(/WalkMesh=(.*)/)
+    m = line.match(/WalkMesh=(\w*)/)
     if m
       wm = m[1]
       next

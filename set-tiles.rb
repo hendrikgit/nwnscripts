@@ -2,7 +2,7 @@
 puts ARGV.first
 tileset = File.read(ARGV.first)
 tiles = []
-for line in tileset.split do
+for line in tileset.lines do
   m = line.match(/\[TILE(\d+)\]/)
   if m
     tiles << m[1].to_i
