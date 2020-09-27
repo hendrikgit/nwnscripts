@@ -19,15 +19,15 @@ for f in files
   fpath = File.join(folder, f)
   new_nr = (nr.to_i + offset).to_s.rjust(3, '0')
   new_fpath = File.join(folder, name + new_nr + f[name_len + 3 .. -1])
+  if File.exists?(new_fpath)
+    puts 'File exists: ' + new_fpath
+    exit(1)
+  end
   case f[-3 .. -1]
   when 'lod', 'mdl', 'mtr'
     File.write(new_fpath, File.read(fpath).gsub(name + nr, name + new_nr))
     File.delete(fpath)
   else
-    if File.exists?(new_fpath)
-      puts 'File exists: ' + new_fpath
-      exit(1)
-    end
     File.rename(fpath, new_fpath)
   end
 end
